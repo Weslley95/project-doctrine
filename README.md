@@ -1,4 +1,4 @@
-## 🧑🏽‍💻📚  Course Spring Boot API REST - Alura
+## 🧑🏽‍💻📚  Course Doctrine ORM - Alura
 
 ## ⚙️ Summary
 
