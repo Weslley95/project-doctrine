@@ -2,6 +2,10 @@
 
 namespace Project\Doctrine\Helper;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Setup;
+
 /**
  * Class base EntityManagerFactory
  *
@@ -12,12 +16,21 @@ class EntityManagerFactory {
     /**
      * Entity manager
      * 
-     * @return object entity manager
+     * @return EntityManagerInterface
+     * @throws \Doctrine\ORM\ORMException
      */
-    public function getEntityManager( ): EntityManager {
+    public function getEntityManager( ):EntityManagerInterface {
+        
+        $rootDir = __DIR__ . '/../..';
         
         // Config in anotation
-        $config = Setup::createAnnotationMetadataConfiguration();
+        $config = Setup::createAnnotationMetadataConfiguration([$rootDir .  '/src'], true);
+        
+        // Connection
+        $connection = [
+            'driver' => 'pdo_sqlite',
+            'path' => $rootDir .  '/var/data/banco.sqlite'
+        ];
         
         return EntityManager::create($connection, $config);
     }
